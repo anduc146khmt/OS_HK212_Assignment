@@ -28,11 +28,9 @@ struct pcb_t *get_proc(void)
 	 * Remember to use lock to protect the queue.
 	 * */
 	pthread_mutex_lock(&queue_lock);
-	if (empty(&ready_queue))
-	{
-		for (int i = 0; i < run_queue.size; i++)
-		{
-		    ready_queue.proc[i]=run_queue.proc[i];
+	if (empty(&ready_queue)) {
+		for (int i = 0; i < run_queue.size; i++) {
+		    ready_queue.proc[i] = run_queue.proc[i];
 			run_queue.proc[i] = NULL;
 		}
 		ready_queue.size = run_queue.size;
